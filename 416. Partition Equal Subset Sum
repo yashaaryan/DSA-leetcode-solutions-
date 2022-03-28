@@ -1,0 +1,22 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        if(nums.length==0) return false;
+        
+        int total=0;
+        for(int i:nums){
+            total+=i;
+        }
+        int sub=total/2;
+        if(total%2!=0) return false;
+        boolean dp[]=new boolean[sub+1];
+        dp[0]=true;
+        
+        for(int i:nums){
+            for(int j=sub;j>=i;j--){
+                dp[j]=dp[j]|| dp[j-i];
+            }
+        }
+        return dp[sub];
+        
+    }
+}
